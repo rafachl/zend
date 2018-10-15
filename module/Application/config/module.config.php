@@ -1,10 +1,4 @@
 <?php
-/**
- * @link      http://github.com/zendframework/ZendSkeletonApplication for the canonical source repository
- * @copyright Copyright (c) 2005-2016 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
- */
-
 namespace Application;
 
 use Zend\Router\Http\Literal;
@@ -24,13 +18,52 @@ return [
                     ],
                 ],
             ],
-            'application' => [
-                'type'    => Segment::class,
+            'usuario_cadastrar' => [
+                'type' => Literal::class,
                 'options' => [
-                    'route'    => '/application[/:action]',
+                    'route'    => '/usuario/cadastrar',
                     'defaults' => [
-                        'controller' => Controller\IndexController::class,
-                        'action'     => 'index',
+                        'controller' => Controller\UsuarioController::class,
+                        'action'     => 'cadastrar',
+                    ],
+                ],
+            ],
+            'usuario_perfil' => [
+                'type' => Segment::class,
+                'options' => [
+                    'route'    => '/usuario[/[:id]]',
+                    'constraints' => [
+                        'id' => '[0-9]+',
+                    ],
+                    'defaults' => [
+                        'controller' => Controller\UsuarioController::class,
+                        'action'     => 'visualizar',
+                    ],
+                ],
+            ],
+            'usuario_excluir' => [
+                'type' => Segment::class,
+                'options' => [
+                    'route'    => '/usuario/excluir/:id',
+                    'constraints' => [
+                        'id' => '[0-9]+',
+                    ],
+                    'defaults' => [
+                        'controller' => Controller\UsuarioController::class,
+                        'action'     => 'excluir',
+                    ],
+                ],
+            ],
+            'usuario_atualizar' => [
+                'type' => Segment::class,
+                'options' => [
+                    'route'    => '/usuario/atualizar/:id',
+                    'constraints' => [
+                        'id' => '[0-9]+',
+                    ],
+                    'defaults' => [
+                        'controller' => Controller\UsuarioController::class,
+                        'action'     => 'atualizar',
                     ],
                 ],
             ],
